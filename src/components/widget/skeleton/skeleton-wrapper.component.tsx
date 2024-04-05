@@ -25,7 +25,7 @@ export const SkeletonWrapper: FC<IProps> = ({children}) => {
                 justifyContent: 'center',
                 width: '100%',
                 position: 'absolute',
-                zIndex: '20',
+                zIndex: 500,
                 bottom: 0,
                 padding: '25px',
                 boxSizing:"border-box",

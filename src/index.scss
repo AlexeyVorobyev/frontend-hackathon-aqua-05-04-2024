@@ -2,3 +2,11 @@ body {
   margin: 0;
   width: 100%;
 }
+
+.leaflet-control-scale {
+  display: none;
+}
+
+.leaflet-control-attribution {
+  display: none;
+}
