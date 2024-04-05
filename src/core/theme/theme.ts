@@ -1,4 +1,4 @@
-import {createTheme} from "@mui/material";
+import {createTheme} from '@mui/material'
 
 // Augment the palette to include an ochre color
 declare module '@mui/material/styles' {
@@ -29,15 +29,15 @@ declare module '@mui/material/Button' {
 export const theme = createTheme({
     palette: {
         primary: {
-            main: '#f49011',
-            light: '#ffb91d',
-            dark: '#eb7727',
+            main: '#BB88FF',
+            light: '#c89fff',
+            dark: '#825fb2',
             contrastText: '#fff',
         },
         secondary: {
-            main: '#2196f3',
-            light: '#4dabf5',
-            dark: '#1769aa',
+            main: '#19C595',
+            light: '#47d0aa',
+            dark: '#118968',
             contrastText: '#fff',
         },
         neutral: {
@@ -45,21 +45,43 @@ export const theme = createTheme({
             light: '#9e9e9e',
             dark: '#616161',
             contrastText: '#FFFFFF',
-            notContrastText: '#616161'
-        }
+            notContrastText: '#616161',
+        },
+    },
+    components: {
+        MuiBottomNavigation: {
+            styleOverrides: {
+                root: {
+                    borderRadius: '20px',
+                    '-webkit-box-shadow': '0px 0px 28px -19px rgba(0, 0, 0, 0.98)',
+                    '-moz-box-shadow': '0px 0px 28px -19px rgba(0, 0, 0, 0.98)',
+                    boxShadow: '0px 0px 28px -19px rgba(0, 0, 0, 0.98)',
+                },
+            },
+        },
+        MuiBottomNavigationAction: {
+            styleOverrides: {
+                selected: {
+                    color: '#19C595',
+                },
+                label: {
+                    color: '#19C595',
+                },
+            },
+        },
     },
 })
 
 export const globalStyles = () => ({
-    "&::-webkit-scrollbar": {
+    '&::-webkit-scrollbar': {
         width: 5,
-        height: 5
+        height: 5,
     },
-    "&::-webkit-scrollbar-track": {
-        backgroundColor: null
+    '&::-webkit-scrollbar-track': {
+        backgroundColor: null,
     },
-    "&::-webkit-scrollbar-thumb": {
-        backgroundColor: "#b2b2b2",
-        borderRadius: 2
+    '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#b2b2b2',
+        borderRadius: 2,
     },
-});
+})

@@ -1,101 +1,37 @@
-import {TRoute} from '../../shared-react-components/AlexRouter/AlexRouter.tsx'
+import { NotExistPage } from '../components/page/not-exist/not-exist-page.component.tsx'
+import {TRoute} from '../shared-react-components/AlexRouter/AlexRouter.tsx'
+import {MapPage} from '../components/page/map/map-page.component.tsx'
 
 export const routesListConfig: TRoute[] = [
     {
         path: '/',
-        name: 'Главная',
+        name: 'Карта',
+        component: <MapPage/>,
+    },
+
+    {
+        path: '/cabinet/',
+        name: 'Кабинет',
         component: null,
     },
 
-    // {
-    //     path: '*',
-    //     name: 'Не существует',
-    //     component: <NotExistPage/>,
-    // },
-    //
-    // {
-    //     path: 'cabinet',
-    //     name: 'Личный кабинет',
-    //     component: <CabinetPage/>,
-    // },
-    //
-    // {
-    //     path: `customization/users`,
-    //     name: 'Пользователи',
-    //     component: <Navigate to={`/customization/users/${EPageType.table}`}/>,
-    // },
-    // {
-    //     path: `customization/users/${EPageType.table}`,
-    //     name: 'Таблица пользователей',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/users/${EPageType.view}`,
-    //     name: 'Пользователь',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/users/${EPageType.edit}`,
-    //     name: 'Настройка пользователей',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/users/${EPageType.add}`,
-    //     name: 'Добавление пользователя',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    //
-    // {
-    //     path: `customization/externalServices`,
-    //     name: 'Внешние сервисы',
-    //     component: <Navigate to={`/customization/externalServices/${EPageType.table}`}/>,
-    // },
-    // {
-    //     path: `customization/externalServices/${EPageType.table}`,
-    //     name: 'Таблица внешних сервисов',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/externalServices/${EPageType.view}`,
-    //     name: 'Внешний сервис',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/externalServices/${EPageType.edit}`,
-    //     name: 'Настройка внешних сервисов',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/externalServices/${EPageType.add}`,
-    //     name: 'Добавление внешнего сервиса',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    //
-    // {
-    //     path: `customization/externalRoles`,
-    //     name: 'Внешние роли',
-    //     component: <Navigate to={`/customization/externalRoles/${EPageType.table}`}/>,
-    // },
-    // {
-    //     path: `customization/externalRoles/${EPageType.table}`,
-    //     name: 'Таблица внешних ролей',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/externalRoles/${EPageType.view}`,
-    //     name: 'Внешняя роль',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/externalRoles/${EPageType.edit}`,
-    //     name: 'Настройка внешних ролей',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
-    // {
-    //     path: `customization/externalRoles/${EPageType.add}`,
-    //     name: 'Добавление внешней роли',
-    //     component: <CustomizationPage config={customizationPageConfig}/>,
-    // },
+    {
+        path: '/places/',
+        name: 'Места',
+        component: null,
+    },
+
+    {
+        path: '/routes/',
+        name: 'Маршруты',
+        component: null,
+    },
+
+    {
+        path: '*',
+        name: 'Не существует',
+        component: <NotExistPage/>,
+    },
 ]
 
 const mapRoutesListPaths = (routesList: TRoute[]): string[] => {
