@@ -6,9 +6,9 @@
   "scripts": {
     "install-deps": "yarn install --ignore-engines",
     "start:dev": "NODE_ENV=development vite --mode development",
-    "build": "NODE_ENV=prod tsc && vite build --mode prod",
-    "build-no-tsc": "vite build",
-    "serve:prod": "serve -s dist",
+    "build": "NODE_ENV=production tsc && vite build --mode production",
+    "build-no-tsc": "NODE_ENV=production vite build --mode production",
+    "serve:prod": "NODE_ENV=production serve -s dist",
     "serve:prod:preview": "vite preview",
     "download:schema:gql:auth": "apollo client:download-schema --endpoint=http://lexxv.ru:50430/api/graphql schema-auth.graphql",
     "download:schema:gql:geoapify": "apollo client:download-schema --endpoint=http://lexxv.ru:50431/api/geoapify-nest-adapter/graphql schema-geoapify-adapter.graphql",
