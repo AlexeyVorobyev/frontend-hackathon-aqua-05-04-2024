@@ -3,10 +3,33 @@ import { Box, Stack } from "@mui/system";
 import { FC } from "react";
 import { AlexIcon } from "../../../shared-react-components/alex-icon/alex-icon.component";
 import { AlexBreadCrumbs } from "../../../shared-react-components/AlexBreadCrumbs/AlexBreadCrumbs";
+import { RouteCard } from "../../widget/route-card/route-card.component";
 
 export const PlacesPage: FC = () => {
     const theme = useTheme();
     return (<>
+        <Box sx={{
+            position: 'fixed',
+            zIndex: -1,
+            right: '-0px',
+            width: '100%',
+            aspectRatio: '381/490'
+        }}>
+            <svg viewBox="0 0 381 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M378.737 1.48508C368.594 2.90184 353.109 9.63477 349.31 11.9293C286.774 49.7006 327.421 107.365 360.693 80.2219C393.965 53.079 354.643 2.7258 312.542 -10.6062C270.442 -23.9383 240.368 -34.351 135.925 9.04477C31.4825 52.4406 -4.69046 113.296 -91.3395 172.821C-177.989 232.346 -260.924 227.821 -329.589 185.626C-398.255 143.43 -466.457 203.304 -497.222 312.379C-527.987 421.453 -658.999 477.88 -714.197 419.832C-769.394 361.784 -698.01 306.252 -657.142 360.763C-653.45 365.687 -646.181 380.063 -643.663 392.596C-637.102 425.251 -639.824 457.007 -668.674 487.019" stroke="#02BF89" stroke-width="3.99867" stroke-linecap="round" stroke-dasharray="14 14" />
+            </svg>
+        </Box>
+        <Box sx={{
+            position: 'fixed',
+            zIndex: -1,
+            bottom: '-0px',
+            width: '100%',
+            aspectRatio: '390/557'
+        }}>
+            <svg viewBox="0 0 390 557" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M717.872 717.251C632.83 613.195 601.578 686.151 567.431 587.758C501.664 398.255 293.559 540.453 365.358 609.02C437.157 677.588 541.621 553.068 520.957 468.038C500.294 383.007 407.438 461.289 305.573 363.007C182.275 244.046 350.178 74.8423 -7.99993 3.25397" stroke="#713DD3" stroke-width="5.99969" stroke-linecap="round" stroke-dasharray="14 14" />
+            </svg>
+        </Box>
         <Stack direction={'column'} spacing={theme.spacing(1)} paddingBottom={'100px'}>
             <Stack direction={'row'} spacing={theme.spacing(1)} sx={{
                 paddingX: '21px',
@@ -39,7 +62,7 @@ export const PlacesPage: FC = () => {
                 <Paper
                     elevation={0}
                     component="form"
-                    sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#D9D9D957' }}
+                    sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#D9D9D957', borderRadius: '10px' }}
                 >
                     <IconButton sx={{ p: '10px 0px 10px 13px' }} aria-label="menu">
                         <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,6 +98,17 @@ export const PlacesPage: FC = () => {
                         <path d="M24.9326 19.2139L18.6826 5.15137C18.6212 5.01329 18.5211 4.89599 18.3944 4.81365C18.2677 4.73132 18.1198 4.6875 17.9687 4.6875H7.03124C6.88145 4.68775 6.73488 4.73105 6.60901 4.81225C6.48313 4.89346 6.38326 5.00914 6.32128 5.14551C6.321 5.14745 6.321 5.14942 6.32128 5.15137V5.16309L0.0673736 19.2139C0.0144913 19.3328 -0.00783174 19.4631 0.00243289 19.5929C0.0126975 19.7226 0.0552244 19.8478 0.12615 19.9569C0.197075 20.0661 0.29415 20.1558 0.408555 20.2179C0.52296 20.28 0.651069 20.3125 0.781241 20.3125H24.2187C24.3489 20.3125 24.477 20.28 24.5914 20.2179C24.7058 20.1558 24.8029 20.0661 24.8738 19.9569C24.9448 19.8478 24.9873 19.7226 24.9975 19.5929C25.0078 19.4631 24.9855 19.3328 24.9326 19.2139ZM6.24999 18.75H1.98339L6.24999 9.15039V18.75ZM7.81249 18.75V9.15039L12.0791 18.75H7.81249ZM13.7891 18.75L8.23339 6.25H17.4609L23.0166 18.75H13.7891Z" fill="#19C595" />
                     </svg>
                 </Paper>
+            </Stack>
+            <Stack direction={'row'} sx={{ p: '4px 26px', overflowX: 'scroll', gap: '16px', height: '153px' }} spacing={theme.spacing(2)}>
+                <img src={"/pic1.png"} />
+                <img src={"/pic2.png"} />
+                <img src={"/pic3.png"} />
+                <img src={"/pic1.png"} />
+                <img src={"/pic2.png"} />
+                <img src={"/pic3.png"} />
+            </Stack>
+            <Stack direction={'column'} sx={{ p: '4px 29px' }}>
+                <RouteCard data={{ imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__', name: '', rating: 5, places: [''], date: '' }} linkTo={'/'} />
             </Stack>
         </Stack>
     </>
