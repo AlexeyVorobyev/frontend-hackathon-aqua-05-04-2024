@@ -14,8 +14,8 @@ interface ICoordinates {
 }
 
 export interface IMapBounds {
-    northEast: ICoordinates,
-    southWest: ICoordinates
+    northWest: ICoordinates,
+    southEast: ICoordinates
 }
 
 interface IProps {
@@ -40,17 +40,17 @@ export const MapBounds: FC<IProps> = ({
         const bounds = map.getBounds()
         const zoom = map.getZoom()
         const coords = map.getCenter()
-        const northEast = bounds.getNorthEast()
-        const southWest = bounds.getSouthWest()
+        const northWest = bounds.getNorthWest()
+        const southEast = bounds.getSouthEast()
         setBoundsDebounced((prev: TStoredOptions) => {
             prev.set('bounds', {
-                northEast: {
-                    lat: northEast.lat >= 0 ? northEast.lat * 1.01 : northEast.lat * 0.99,
-                    lon: northEast.lng >= 0 ? northEast.lng * 1.01 : northEast.lng * 0.99,
+                northWest: {
+                    lat: northWest.lat,
+                    lon: northWest.lng,
                 },
-                southWest: {
-                    lat: southWest.lat < 0 ? southWest.lat * 1.01 : southWest.lat * 0.99,
-                    lon: southWest.lng < 0 ? southWest.lng * 1.01 : southWest.lng * 0.99,
+                southEast: {
+                    lat: southEast.lat,
+                    lon: southEast.lng,
                 }
             })
             prev.set('zoom', zoom)

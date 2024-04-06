@@ -16,7 +16,7 @@ export const MapTilesPane: FC<IProps> = ({
     return (
         <Pane name="tilesPane"
               style={{filter: storedOptions.get('grayscale') ? `grayscale(${GLOBAL_CONFIG.mapGrayscale})` : `grayscale(0%)`}}>
-            <LayersControl position="topleft" collapsed={true}>
+            <LayersControl position="topright" collapsed>
                 {mapBackground.map((mapTile, idx) => (
                     <LayersControl.BaseLayer key={mapTile.name} name={mapTile.name}
                                              checked={storedOptions.get('baseLayer') ? mapTile.name === storedOptions.get('baseLayer') : idx === 0}>

@@ -61,18 +61,20 @@ export const theme = createTheme({
         },
         MuiBottomNavigationAction: {
             styleOverrides: {
-                selected: {
-                    color: '#19C595',
-                },
-                label: {
-                    color: '#19C595',
-                },
-            },
+                root: {
+                    "&.Mui-selected": {
+                        "color": "#19C595"
+                    }
+                }
+            }
         },
     },
 })
 
 export const globalStyles = () => ({
+    '.MuiDrawer-paper': {
+        borderRadius: "20px 20px 0 0"
+    },
     '&::-webkit-scrollbar': {
         width: 5,
         height: 5,

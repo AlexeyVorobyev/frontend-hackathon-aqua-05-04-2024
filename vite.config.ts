@@ -7,4 +7,7 @@ export default defineConfig({
     port: 3000,
   },
   base:'/',
+  optimizeDeps: {
+    exclude: ['@changey/react-leaflet-markercluster']
+  }
 })

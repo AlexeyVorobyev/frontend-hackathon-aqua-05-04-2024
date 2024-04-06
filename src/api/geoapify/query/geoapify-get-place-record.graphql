@@ -1,0 +1,27 @@
+query GeoapifyGetPlaceRecord($input: TPlaceRecordInput!) {
+    place {
+        record(input: $input) {
+            id
+            name
+            description
+            facilities {
+                delivery
+                dogs
+                wheelchair
+                takeaway
+                toilets
+                internetAccess
+            }
+            contacts {
+                website
+                email
+                phone
+            }
+            location {
+                fullAddress
+                street
+                country
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react'
-import {ApolloClient, ApolloProvider, createHttpLink, fromPromise, InMemoryCache} from '@apollo/client'
+import {ApolloClient, ApolloLink, ApolloProvider, createHttpLink, fromPromise, InMemoryCache} from '@apollo/client'
 import {serverErrorAfterware} from './afterware/server-error-afterware.ts'
 import {GLOBAL_CONFIG} from '../../globalConfig.ts'
 import {setContext} from '@apollo/client/link/context'
@@ -37,13 +37,22 @@ const refreshTokens = async () => {
     }
 }
 
-const httpLink = createHttpLink({
+const httpLinkAuth = createHttpLink({
     uri: GLOBAL_CONFIG.apiAuthServiceAddress,
 })
 
-type TOriginalError = {
-    statusCode: number
+const httpLinkGeoapifyAdapter = createHttpLink({
+    uri: GLOBAL_CONFIG.geoapifyNestAdapterAddress,
+})
+
+export enum EGraphqlLinks {
+    auth = 'httpLinkAuth',
+    geoapify = 'httpLinkGeoapifyAdapter'
 }
+
+// const httpLinkAuth = createHttpLink({
+//     uri: GLOBAL_CONFIG.apiAuthServiceAddress,
+// })
 
 export const errorLink = onError(({graphQLErrors, operation, forward}) => {
     console.debug(graphQLErrors)
@@ -74,7 +83,11 @@ const defaultClient = new ApolloClient({
     link: errorLink.concat(
         authLink.concat(
             serverErrorAfterware.concat(
-                httpLink,
+                ApolloLink.split(
+                    operation => operation.getContext().clientName === EGraphqlLinks.auth,
+                    httpLinkAuth,
+                    httpLinkGeoapifyAdapter
+                )
             ),
         ),
     ),

@@ -1,0 +1,30 @@
+query GeoapifyGetPlaceList($input: TPlaceListInput!) {
+    place {
+        list(input: $input) {
+            data {
+                id
+                name
+                description
+                location {
+                    coordinates {
+                        lat
+                        lon
+                    }
+                }
+#                contacts {
+#                    website
+#                    phone
+#                }
+#                facilities {
+#                    delivery
+#                    dogs
+#                    wheelchair
+#                    takeaway
+#                    toilets
+#                    internetAccess
+#                    smoking
+#                }
+            }
+        }
+    }
+}
