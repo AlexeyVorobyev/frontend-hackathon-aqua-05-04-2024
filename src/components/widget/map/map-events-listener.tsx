@@ -1,6 +1,5 @@
 import React, {FC, useCallback} from 'react'
 import {MapEvents} from './map-events.tsx'
-import {IUseServerSideOptions} from '../../functions/usePageState'
 import {LayersControlEvent} from 'leaflet'
 import {CLUSTERS_NAME, GRAYSCALE_NAME} from './map-render.component.tsx'
 import {
