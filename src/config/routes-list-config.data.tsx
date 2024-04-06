@@ -2,6 +2,7 @@ import { NotExistPage } from '../components/page/not-exist/not-exist-page.compon
 import {TRoute} from '../shared-react-components/AlexRouter/AlexRouter.tsx'
 import {MapPage} from '../components/page/map/map-page.component.tsx'
 import {RoutesPage} from '../components/page/routes/routes-page.component.tsx'
+import { PlacesPage } from '../components/page/places/places.component.tsx'
 
 export const routesListConfig: TRoute[] = [
     {
@@ -19,7 +20,7 @@ export const routesListConfig: TRoute[] = [
     {
         path: '/places/',
         name: 'Места',
-        component: null
+        component: <PlacesPage/>,
     },
 
     {
