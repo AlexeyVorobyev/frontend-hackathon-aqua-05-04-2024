@@ -27,3 +27,5 @@ dist-ssr
 
 schema-auth.graphql
 schema-geoapify-adapter.graphql
+
+dev-dist
