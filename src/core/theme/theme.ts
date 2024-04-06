@@ -49,6 +49,13 @@ export const theme = createTheme({
         },
     },
     components: {
+        MuiStack: {
+            styleOverrides: {
+                root: {
+                    marginTop: 0
+                }
+            }
+        },
         MuiBottomNavigation: {
             styleOverrides: {
                 root: {
@@ -72,6 +79,9 @@ export const theme = createTheme({
 })
 
 export const globalStyles = () => ({
+    '.css-1rb8ayf-MuiStack-root .css-1rb8ayf-MuiStack-root > :not(style) ~ :not(style)': {
+        marginTop: 0
+    },
     '.MuiDrawer-paper': {
         borderRadius: "20px 20px 0 0"
     },
