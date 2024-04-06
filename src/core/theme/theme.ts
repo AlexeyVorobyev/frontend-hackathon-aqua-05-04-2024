@@ -49,6 +49,13 @@ export const theme = createTheme({
         },
     },
     components: {
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#ffffff'
+                }
+            }
+        },
         MuiStack: {
             styleOverrides: {
                 root: {

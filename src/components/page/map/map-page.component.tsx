@@ -23,7 +23,10 @@ export enum EMapPageStoredOptions {
     baseLayer = 'baseLayer',
     grayScale = 'grayScale',
     clusters = 'clusters',
-    bounds = 'bounds'
+    bounds = 'bounds',
+    simpleFilter = 'simpleFilter',
+    placeType= 'placeType',
+    placeCondition='placeCondition'
 }
 
 export const MapPage: FC = () => {
@@ -77,8 +80,8 @@ export const MapPage: FC = () => {
         {geoapifyGetPlaceListQueryLoading && (
             <CircularProgress sx={{
                 position: 'absolute',
-                top: '25px',
-                left: '25px',
+                bottom: '95px',
+                left: '33px',
                 zIndex: 1000,
                 width: '44px',
                 height:'44px'

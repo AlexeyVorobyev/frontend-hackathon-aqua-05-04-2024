@@ -15,6 +15,15 @@ import {UserMarker} from './markers/user-marker.component.tsx'
 import {GeoapifyGetPlaceListQuery} from '../../../core/apollo/types/graphql/graphql.ts'
 import {EMarkerType, IPlaceMarkerProps, PlaceMarker} from './markers/external-place-marker.component.tsx'
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import {AlexFilters} from '../../../shared-react-components/AlexFilters/AlexFilters.tsx'
+import {Box} from '@mui/system'
+import {Button} from '@mui/material'
+import {AlexInput} from '../../../shared-react-components/form-utils/AlexInput/AlexInput.tsx'
+import {AlexInputControlled} from '../../../shared-react-components/form-utils/AlexInput/AlexInputControlled.tsx'
+import {FormProvider, useForm} from 'react-hook-form'
+import {AlexFiltersDialog} from '../../../shared-react-components/AlexFilters/AlexFiltersDialog.tsx'
+import {useDebounce} from '../../hook/useDebounce.tsx'
+import {alexFiltersConfigData} from '../../../config/alex-filters-config.data.tsx'
 
 type TPlacesList = GeoapifyGetPlaceListQuery['place']['list']['data']
 
@@ -44,23 +53,24 @@ export const MapRender: FC<IProps> = ({
                     lat: item.location.coordinates.lat,
                     lon: item.location.coordinates.lon,
                 },
-                markerType: EMarkerType.external
+                markerType: EMarkerType.external,
             } as IPlaceMarkerProps
         })
     }, [externalPlacesList])
 
     useEffect(() => {
         if (Array.isArray(externalPlacesList)) {
-            setDataExternalPlacesProcessed((prevState) => {
-                const calced = dataExternalPlacesFormat(externalPlacesList)
-
-                return [
-                    ...prevState.filter((item) => (
-                        !calced.map((item) => item.id).includes(item.id)
-                    )),
-                    ...calced,
-                ]
-            })
+            // setDataExternalPlacesProcessed((prevState) => {
+            //     const calced = dataExternalPlacesFormat(externalPlacesList)
+            //
+            //     return [
+            //         ...prevState.filter((item) => (
+            //             !calced.map((item) => item.id).includes(item.id)
+            //         )),
+            //         ...calced,
+            //     ]
+            // })
+            setDataExternalPlacesProcessed(dataExternalPlacesFormat(externalPlacesList))
         }
     }, [externalPlacesList])
 
@@ -72,7 +82,44 @@ export const MapRender: FC<IProps> = ({
         </>)
     }, [dataExternalPlacesProcessed])
 
+    const [simpleFilterValue, setSimpleFilterValue] = useState<string>(storedOptions.get('simpleFilter') || '')
+
+
+    useEffect(() => {
+        debouncedSetStoredOptions((prev: TStoredOptions) => {
+            if (simpleFilterValue) {
+                prev.set('simpleFilter', simpleFilterValue)
+            } else {
+                prev.delete('simpleFilter')
+            }
+            return new Map(prev)
+        })
+    }, [simpleFilterValue])
+
+    const debouncedSetStoredOptions = useDebounce(setStoredOptions, 500)
+
     return (<>
+        <Box sx={{
+            position: 'absolute',
+            zIndex: 403,
+            left: '25px',
+            top: '25px',
+        }}>
+            <AlexInput value={simpleFilterValue}
+                       onChange={(event) => setSimpleFilterValue(event.target.value)}
+                       placeholder={'Поиск'}
+                       InputProps={{
+                           endAdornment: (
+                               <AlexFiltersDialog storedOptions={storedOptions}
+                                                  setServerSideOptions={setStoredOptions}
+                                                  filterListIds={[
+                                                      'placeType',
+                                                      'placeCondition'
+                                                  ]}
+                                                  filtersMap={alexFiltersConfigData}/>
+                           ),
+                       }}/>
+        </Box>
         <MapContainer
             preferCanvas={true}
             maxZoom={GLOBAL_CONFIG.mapMaxZoom}

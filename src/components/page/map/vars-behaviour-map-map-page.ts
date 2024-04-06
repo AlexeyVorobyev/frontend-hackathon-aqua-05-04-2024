@@ -10,14 +10,24 @@ export const varsBehaviourMapMapPage = (params: any): Record<string, any> | null
             boundingBox: {
                 bottomRight: {
                     lat: bounds.southEast.lat,
-                    lon: bounds.southEast.lon
+                    lon: bounds.southEast.lon,
                 },
                 topLeft: {
                     lat: bounds.northWest.lat,
-                    lon: bounds.northWest.lon
-                }
+                    lon: bounds.northWest.lon,
+                },
             },
-            perPage: 500
+            language: 'russian',
+            perPage: 500,
+            ...(params[EMapPageStoredOptions.simpleFilter]?.length && {
+                simpleFilter: params[EMapPageStoredOptions.simpleFilter],
+            }),
+            ...(params[EMapPageStoredOptions.simpleFilter]?.length && {
+                simpleFilter: params[EMapPageStoredOptions.simpleFilter],
+            }),
+            ...(params[EMapPageStoredOptions.placeCondition]?.length && {
+                conditions: params[EMapPageStoredOptions.placeCondition],
+            }),
         } as TPlaceListInput
     } else {
         return null
