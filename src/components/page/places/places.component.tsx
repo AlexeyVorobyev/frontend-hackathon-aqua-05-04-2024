@@ -1,11 +1,26 @@
-import { IconButton, InputBase, Paper, TextField, Typography, useTheme } from "@mui/material";
+import { Button, IconButton, InputBase, Paper, Popover, TextField, Typography, useTheme } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { FC } from "react";
 import { AlexIcon } from "../../../shared-react-components/alex-icon/alex-icon.component";
 import { PlaceCard } from "../../widget/place-card/place-card";
+import React from "react";
 
 export const PlacesPage: FC = () => {
     const theme = useTheme();
+
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'notifications-popover' : undefined;
+
     return (<>
         <Box sx={{
             position: 'fixed',
@@ -29,7 +44,29 @@ export const PlacesPage: FC = () => {
                 <path d="M717.872 717.251C632.83 613.195 601.578 686.151 567.431 587.758C501.664 398.255 293.559 540.453 365.358 609.02C437.157 677.588 541.621 553.068 520.957 468.038C500.294 383.007 407.438 461.289 305.573 363.007C182.275 244.046 350.178 74.8423 -7.99993 3.25397" stroke="#713DD3" stroke-width="5.99969" stroke-linecap="round" stroke-dasharray="14 14" />
             </svg>
         </Box>
-        <Stack direction={'column'} spacing={theme.spacing(1)} sx={{height: '100vh'}}>
+        <Popover
+            id={id}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+            }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+        >
+            <Stack direction={'column'} sx={{ width: '100%', height: '100%', overflowY: 'scroll', alignItems: 'stretch', py: '10px' }}>
+                <Stack direction={'column'} sx={{ px: '15px' }}>
+                    <Typography variant="h5">Добро пожаловать!</Typography>
+                    <Typography>Ура!!!</Typography>
+                    <Typography sx={{ opacity: '0.5' }}>{new Date().toDateString()}</Typography>
+                </Stack>
+            </Stack>
+        </Popover>
+        <Stack direction={'column'} spacing={theme.spacing(1)} sx={{ height: '100vh' }}>
             <Stack direction={'row'} spacing={theme.spacing(1)} sx={{
                 paddingX: '21px',
                 paddingY: '19px',
@@ -51,10 +88,13 @@ export const PlacesPage: FC = () => {
 
                     )} width={'48px'} />
                 </Stack>
-                <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M28.5914 23.6798C27.8759 22.4474 26.8125 18.9605 26.8125 14.4062C26.8125 11.6712 25.726 9.04818 23.792 7.11421C21.858 5.18024 19.235 4.09375 16.5 4.09375C13.7649 4.09375 11.1419 5.18024 9.20793 7.11421C7.27396 9.04818 6.18747 11.6712 6.18747 14.4062C6.18747 18.9618 5.12271 22.4474 4.40728 23.6798C4.22458 23.9931 4.12772 24.349 4.12648 24.7117C4.12523 25.0743 4.21964 25.4309 4.40018 25.7455C4.58073 26.06 4.84102 26.3214 5.15481 26.5032C5.4686 26.6851 5.8248 26.781 6.18747 26.7812H11.4481C11.6861 27.9455 12.3188 28.9918 13.2393 29.7432C14.1599 30.4947 15.3117 30.9051 16.5 30.9051C17.6883 30.9051 18.8401 30.4947 19.7606 29.7432C20.6811 28.9918 21.3139 27.9455 21.5518 26.7812H26.8125C27.175 26.7808 27.5311 26.6847 27.8447 26.5028C28.1583 26.3208 28.4184 26.0594 28.5988 25.7449C28.7792 25.4304 28.8735 25.0739 28.8722 24.7113C28.8709 24.3488 28.774 23.993 28.5914 23.6798ZM16.5 28.8438C15.8604 28.8436 15.2365 28.6451 14.7144 28.2758C14.1922 27.9064 13.7973 27.3843 13.5841 26.7812H19.4158C19.2026 27.3843 18.8078 27.9064 18.2856 28.2758C17.7634 28.6451 17.1396 28.8436 16.5 28.8438ZM6.18747 24.7188C7.18005 23.012 8.24997 19.0572 8.24997 14.4062C8.24997 12.2182 9.11916 10.1198 10.6663 8.57262C12.2135 7.02544 14.3119 6.15625 16.5 6.15625C18.688 6.15625 20.7864 7.02544 22.3336 8.57262C23.8808 10.1198 24.75 12.2182 24.75 14.4062C24.75 19.0533 25.8173 23.0082 26.8125 24.7188H6.18747Z" fill="#343330" />
-                    <path d="M30.1176 7.94115C30.1176 11.3027 27.206 14.1176 23.5 14.1176C19.794 14.1176 16.8824 11.3027 16.8824 7.94115C16.8824 4.57961 19.794 1.76468 23.5 1.76468C27.206 1.76468 30.1176 4.57961 30.1176 7.94115Z" fill="#BB88FF" stroke="white" stroke-width="1.76471" />
-                </svg>
+                <Button sx={{ width: '48px', height: '48px', padding: '0', minWidth: '48px', borderRadius: '100%', overflow: 'hidden' }}
+                    aria-describedby={id} onClick={handleClick}>
+                    <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M28.5914 23.6798C27.8759 22.4474 26.8125 18.9605 26.8125 14.4062C26.8125 11.6712 25.726 9.04818 23.792 7.11421C21.858 5.18024 19.235 4.09375 16.5 4.09375C13.7649 4.09375 11.1419 5.18024 9.20793 7.11421C7.27396 9.04818 6.18747 11.6712 6.18747 14.4062C6.18747 18.9618 5.12271 22.4474 4.40728 23.6798C4.22458 23.9931 4.12772 24.349 4.12648 24.7117C4.12523 25.0743 4.21964 25.4309 4.40018 25.7455C4.58073 26.06 4.84102 26.3214 5.15481 26.5032C5.4686 26.6851 5.8248 26.781 6.18747 26.7812H11.4481C11.6861 27.9455 12.3188 28.9918 13.2393 29.7432C14.1599 30.4947 15.3117 30.9051 16.5 30.9051C17.6883 30.9051 18.8401 30.4947 19.7606 29.7432C20.6811 28.9918 21.3139 27.9455 21.5518 26.7812H26.8125C27.175 26.7808 27.5311 26.6847 27.8447 26.5028C28.1583 26.3208 28.4184 26.0594 28.5988 25.7449C28.7792 25.4304 28.8735 25.0739 28.8722 24.7113C28.8709 24.3488 28.774 23.993 28.5914 23.6798ZM16.5 28.8438C15.8604 28.8436 15.2365 28.6451 14.7144 28.2758C14.1922 27.9064 13.7973 27.3843 13.5841 26.7812H19.4158C19.2026 27.3843 18.8078 27.9064 18.2856 28.2758C17.7634 28.6451 17.1396 28.8436 16.5 28.8438ZM6.18747 24.7188C7.18005 23.012 8.24997 19.0572 8.24997 14.4062C8.24997 12.2182 9.11916 10.1198 10.6663 8.57262C12.2135 7.02544 14.3119 6.15625 16.5 6.15625C18.688 6.15625 20.7864 7.02544 22.3336 8.57262C23.8808 10.1198 24.75 12.2182 24.75 14.4062C24.75 19.0533 25.8173 23.0082 26.8125 24.7188H6.18747Z" fill="#343330" />
+                        <path d="M30.1176 7.94115C30.1176 11.3027 27.206 14.1176 23.5 14.1176C19.794 14.1176 16.8824 11.3027 16.8824 7.94115C16.8824 4.57961 19.794 1.76468 23.5 1.76468C27.206 1.76468 30.1176 4.57961 30.1176 7.94115Z" fill="#BB88FF" stroke="white" stroke-width="1.76471" />
+                    </svg>
+                </Button>
             </Stack>
             <Box sx={{ paddingX: '26px' }}>
                 <Paper
