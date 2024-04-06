@@ -2,8 +2,7 @@ import { IconButton, InputBase, Paper, TextField, Typography, useTheme } from "@
 import { Box, Stack } from "@mui/system";
 import { FC } from "react";
 import { AlexIcon } from "../../../shared-react-components/alex-icon/alex-icon.component";
-import { AlexBreadCrumbs } from "../../../shared-react-components/AlexBreadCrumbs/AlexBreadCrumbs";
-import { RouteCard } from "../../widget/route-card/route-card.component";
+import { PlaceCard } from "../../widget/place-card/place-card";
 
 export const PlacesPage: FC = () => {
     const theme = useTheme();
@@ -30,11 +29,10 @@ export const PlacesPage: FC = () => {
                 <path d="M717.872 717.251C632.83 613.195 601.578 686.151 567.431 587.758C501.664 398.255 293.559 540.453 365.358 609.02C437.157 677.588 541.621 553.068 520.957 468.038C500.294 383.007 407.438 461.289 305.573 363.007C182.275 244.046 350.178 74.8423 -7.99993 3.25397" stroke="#713DD3" stroke-width="5.99969" stroke-linecap="round" stroke-dasharray="14 14" />
             </svg>
         </Box>
-        <Stack direction={'column'} spacing={theme.spacing(1)} paddingBottom={'100px'}>
+        <Stack direction={'column'} spacing={theme.spacing(1)} sx={{height: '100vh'}}>
             <Stack direction={'row'} spacing={theme.spacing(1)} sx={{
                 paddingX: '21px',
                 paddingY: '19px',
-                // gap: '11px',
                 flexWrap: 'nowrap',
                 alignItems: 'center'
             }}>
@@ -99,16 +97,38 @@ export const PlacesPage: FC = () => {
                     </svg>
                 </Paper>
             </Stack>
-            <Stack direction={'row'} sx={{ p: '4px 26px', overflowX: 'scroll', gap: '16px', height: '153px' }} spacing={theme.spacing(2)}>
-                <img src={"/pic1.png"} />
-                <img src={"/pic2.png"} />
-                <img src={"/pic3.png"} />
-                <img src={"/pic1.png"} />
-                <img src={"/pic2.png"} />
-                <img src={"/pic3.png"} />
-            </Stack>
-            <Stack direction={'column'} sx={{ p: '4px 29px' }}>
-                <RouteCard data={{ imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__', name: '', rating: 5, places: [''], date: '' }} linkTo={'/'} />
+            <Stack direction={'column'} spacing={theme.spacing(2)} sx={{ flexGrow: '1', overflowY: 'scroll', paddingBottom: '100px' }}>
+                <Stack direction={'row'} sx={{ p: '4px 26px', overflowX: 'scroll', gap: '16px', height: '153px', flexShrink: '0' }} spacing={theme.spacing(2)}>
+                    <img src={"/pic1.png"} />
+                    <img src={"/pic2.png"} />
+                    <img src={"/pic3.png"} />
+                    <img src={"/pic1.png"} />
+                    <img src={"/pic2.png"} />
+                    <img src={"/pic3.png"} />
+                </Stack>
+                <Stack direction={'column'} sx={{ p: '4px 29px' }} spacing={theme.spacing(2)}>
+                    <PlaceCard data={{
+                        imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__',
+                        name: 'Питстоп',
+                        rating: 4.5,
+                        place: 'г Сочи, Хостинский район',
+                        icons: ['gas', 'camping', 'toilet', 'tent', 'health']
+                    }} linkTo={'/'} />
+                    <PlaceCard data={{
+                        imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__',
+                        name: 'Хаб',
+                        rating: 4.8,
+                        place: 'г Сочи, Хостинский район',
+                        icons: ['gas', 'camping', 'toilet', 'tent', 'health']
+                    }} linkTo={'/'} />
+                    <PlaceCard data={{
+                        imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__',
+                        name: 'Питстоп',
+                        rating: 4.5,
+                        place: 'г Сочи, Хостинский район',
+                        icons: ['gas', 'camping', 'toilet', 'tent', 'health']
+                    }} linkTo={'/'} />
+                </Stack>
             </Stack>
         </Stack>
     </>
