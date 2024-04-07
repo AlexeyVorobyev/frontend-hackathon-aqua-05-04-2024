@@ -1,12 +1,58 @@
-import { Button, Paper, Typography, useTheme } from "@mui/material";
+import {Button, Paper, Popover, Typography, useTheme} from '@mui/material'
 import { Box, Stack } from "@mui/system";
-import { FC } from "react";
+import {FC, useState} from 'react'
 import { ProfileButton } from "./profile-button";
 
 export const ProfilePage: FC = () => {
     const theme = useTheme();
+    const [openButtonPopover, setOpenButtonPopover] = useState<boolean>(false)
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget)
+        setOpenButtonPopover(!openButtonPopover)
+    }
 
     return <>
+        <Popover
+            open={openButtonPopover}
+            anchorEl={anchorEl}
+            sx={{
+                zIndex: 100000,
+            }}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}
+        >
+            <Paper elevation={3} sx={{ padding: '10px' }}>
+                <Stack direction={'column'} spacing={theme.spacing(1)} alignItems={'center'}>
+                    <Typography variant={'subtitle1'}>Выйти из аккаунта?</Typography>
+                    <Stack direction={'row'} spacing={theme.spacing(1)}>
+                        <Button size={'large'}
+                                sx={{
+                                    width: '80px',
+                                }}
+                                color={'error'}
+                                onClick={() => {
+                                    localStorage.clear()
+                                    location.reload()
+                                }}
+                                variant="contained">
+                            Да
+                        </Button>
+                        <Button size={'large'}
+                                sx={{
+                                    width: '80px',
+                                }}
+                                color={'neutral'}
+                                onClick={() => setOpenButtonPopover(false)}
+                                variant="outlined">
+                            Нет
+                        </Button>
+                    </Stack>
+                </Stack>
+            </Paper>
+        </Popover>
         <Stack direction={'column'} sx={{ alignItems: 'stretch', height: '100%' }} spacing={theme.spacing(2)}>
             <Box sx={{ height: '64px' }} />
 
@@ -106,8 +152,8 @@ export const ProfilePage: FC = () => {
                 </Box>
                 <img src="/ivan.png" width={'121px'} height={'121px'} />
             </Stack>
-            <Stack direction={'row'} sx={{ alignItems: 'center', justifyContent: 'center' }} spacing={theme.spacing(1)}>
-                <Typography variant={'h4'}>
+            <Stack  direction={'row'} sx={{ alignItems: 'center', justifyContent: 'center' }} spacing={theme.spacing(1)}>
+                <Typography variant={'h4'} onClick={handleClick}>
                     Головачев Иван
                 </Typography>
                 <svg width="34" height="30" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg">
