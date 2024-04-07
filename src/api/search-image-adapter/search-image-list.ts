@@ -5,6 +5,7 @@ export const fetchImageList = async (filter: string) => {
     url.searchParams.set('source', 'yandex')
     url.searchParams.set('healthCheck', 'true')
     url.searchParams.set('simpleFilter', filter)
+    url.searchParams.set('perPage', '5')
     return await fetch(url,{
         method: 'GET'
     })

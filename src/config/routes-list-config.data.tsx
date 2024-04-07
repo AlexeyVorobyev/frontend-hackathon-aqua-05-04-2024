@@ -4,6 +4,7 @@ import {MapPage} from '../components/page/map/map-page.component.tsx'
 import {RoutesPage} from '../components/page/routes/routes-page.component.tsx'
 import { PlacesPage } from '../components/page/places/places.component.tsx'
 import { ProfilePage } from '../components/page/profile/profile.tsx'
+import {PlacePage} from '../components/page/place/place.component.tsx'
 
 export const routesListConfig: TRoute[] = [
     {
@@ -22,6 +23,12 @@ export const routesListConfig: TRoute[] = [
         path: '/places/',
         name: 'Места',
         component: <PlacesPage/>,
+    },
+
+    {
+        path: '/places/place',
+        name: 'Место',
+        component: <PlacePage/>,
     },
 
     {

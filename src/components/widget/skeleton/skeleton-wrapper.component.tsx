@@ -30,7 +30,12 @@ export const SkeletonWrapper: FC<IProps> = ({children}) => {
                 padding: '25px',
                 boxSizing:"border-box",
             }}>
-                <AlexMobileBottomNavigation config={alexBottomMobileNavigationConfigData}/>
+                <AlexMobileBottomNavigation
+                    config={alexBottomMobileNavigationConfigData}
+                    disabledOnRoutes={[
+                        '/places/place'
+                    ]}
+                />
             </Box>
         </Box>
     )

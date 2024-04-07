@@ -4,6 +4,8 @@ import { FC } from "react";
 import { AlexIcon } from "../../../shared-react-components/alex-icon/alex-icon.component";
 import { PlaceCard } from "../../widget/place-card/place-card";
 import React from "react";
+import {AlexImageView} from '../../../shared-react-components/form-utils/AlexImageView/AlexImageView.tsx'
+import Slider from 'react-slick'
 
 export const PlacesPage: FC = () => {
     const theme = useTheme();
@@ -138,36 +140,38 @@ export const PlacesPage: FC = () => {
                 </Paper>
             </Stack>
             <Stack direction={'column'} spacing={theme.spacing(2)} sx={{ flexGrow: '1', overflowY: 'scroll', paddingBottom: '100px' }}>
-                <Stack direction={'row'} sx={{ p: '4px 26px', overflowX: 'scroll', gap: '16px', height: '153px', flexShrink: '0' }} spacing={theme.spacing(2)}>
-                    <img src={"/pic1.png"} />
-                    <img src={"/pic2.png"} />
-                    <img src={"/pic3.png"} />
-                    <img src={"/pic1.png"} />
-                    <img src={"/pic2.png"} />
-                    <img src={"/pic3.png"} />
+                <Stack direction={'row'}
+                       sx={{p: '4px 26px', overflowX: 'scroll', gap: '16px', height: '153px', flexShrink: '0'}}
+                       spacing={theme.spacing(2)}>
+                    <AlexImageView src={'/pic1.png'} modal paperStyles={{boxShadow: 'none', flexShrink: 0}}/>
+                    <AlexImageView src={'/pic2.png'} modal paperStyles={{boxShadow: 'none', flexShrink: 0}}/>
+                    <AlexImageView src={'/pic3.png'} modal paperStyles={{boxShadow: 'none', flexShrink: 0}}/>
+                    <AlexImageView src={'/pic1.png'} modal paperStyles={{boxShadow: 'none', flexShrink: 0}}/>
+                    <AlexImageView src={'/pic2.png'} modal paperStyles={{boxShadow: 'none', flexShrink: 0}}/>
+                    <AlexImageView src={'/pic3.png'} modal paperStyles={{boxShadow: 'none', flexShrink: 0}}/>
                 </Stack>
-                <Stack direction={'column'} sx={{ p: '4px 29px' }} spacing={theme.spacing(2)}>
+                <Stack direction={'column'} sx={{p: '4px 29px'}} spacing={theme.spacing(2)}>
                     <PlaceCard data={{
                         imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__',
                         name: 'Питстоп',
                         rating: 4.5,
                         place: 'г Сочи, Хостинский район',
                         icons: ['gas', 'camping', 'toilet', 'tent', 'health']
-                    }} linkTo={'/'} />
+                    }} linkTo={'/places/place'} />
                     <PlaceCard data={{
                         imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__',
                         name: 'Хаб',
                         rating: 4.8,
                         place: 'г Сочи, Хостинский район',
                         icons: ['gas', 'camping', 'toilet', 'tent', 'health']
-                    }} linkTo={'/'} />
+                    }} linkTo={'/places/place'} />
                     <PlaceCard data={{
                         imageUrl: 'https://s3-alpha-sig.figma.com/img/44df/ff16/9795105299c363bd170c35cd2f70ee0f?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RKUGpXUyi49tuDsFPMtiZXInaT6zhA6br3a7G-ST3ELOqW5tSmqleoryVkz82H6mS~zJmbW3LDCZ-pm7Bc3OQlJgGXTkLEhBlzu9jzabEUubCQ26p1ugpukrMZR5wCNchHrq4C-cn-W9PzDjC-ID6WASHGgZt9uyircX0r7XWJZ82spaWZHq46UKAzejrKX0tgHCqOYfWu-g~CZhYdsROGxSz9Dy6EKN26tMG4P7K5iUU-fdo6x~s4kBFolrl-4zf4mhTrui3EQ6tAOo49B8WARu5uMRBZ~WbtXpV1Mmip4iKRYFZURrr29oheFDPSSWZ05deBbsArtLrvn6EwhfGA__',
                         name: 'Питстоп',
                         rating: 4.5,
                         place: 'г Сочи, Хостинский район',
                         icons: ['gas', 'camping', 'toilet', 'tent', 'health']
-                    }} linkTo={'/'} />
+                    }} linkTo={'/places/place'} />
                 </Stack>
             </Stack>
         </Stack>

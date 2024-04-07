@@ -10,12 +10,14 @@ import {EGraphqlLinks} from '../../../core/apollo/apollo-provider-with-client.ts
 import {AlexIcon} from '../../../shared-react-components/alex-icon/alex-icon.component.tsx'
 import {fetchImageList} from '../../../api/search-image-adapter/search-image-list.ts'
 import {AlexImageView} from '../../../shared-react-components/form-utils/AlexImageView/AlexImageView.tsx'
+import Slider from 'react-slick'
+import {useNavigate} from 'react-router-dom'
 
 interface IProps {
     id: string
 }
 
-export const PlaceCardDrawer:FC<IProps> = () => {
+export const PlaceCardDrawer: FC<IProps> = () => {
     const [open, setOpen] = useState<boolean>(false)
 
     useEffect(() => {
@@ -25,6 +27,8 @@ export const PlaceCardDrawer:FC<IProps> = () => {
     const theme = useTheme()
 
     const pickedPlaceIdVar: string = useReactiveVar(pickedPlaceId) as string
+
+    const navigate = useNavigate()
 
     const [
         geoapifyGetPlaceRecordLazyQuery,
@@ -41,22 +45,22 @@ export const PlaceCardDrawer:FC<IProps> = () => {
             variables: {
                 input: {
                     id: pickedPlaceIdVar,
-                    language: 'russian'
+                    language: 'russian',
                 },
             },
         })
     }, [pickedPlaceIdVar])
 
-    const placeData = useMemo(() => geoapifyGetPlaceRecordQueryData?.place.record,[geoapifyGetPlaceRecordQueryData])
+    const placeData = useMemo(() => geoapifyGetPlaceRecordQueryData?.place.record, [geoapifyGetPlaceRecordQueryData])
 
-    const [image,setImage] = useState<string | null>(null)
+    const [imageState, setImageState] = useState<string[]>([])
 
     useEffect(() => {
         if (placeData?.name) {
             fetchImageList(placeData.name).then(async (response) => {
                 const res = await response.json()
                 if (res?.data?.length) {
-                    setImage(res.data[0])
+                    setImageState(res.data)
                 }
             })
         }
@@ -68,27 +72,39 @@ export const PlaceCardDrawer:FC<IProps> = () => {
             open={open}
             sx={{
                 'MuiDrawer-paperAnchorBottom': {
-                    borderRadius: "20px 20px 0 0"
-                }
+                    borderRadius: '20px 20px 0 0',
+                },
             }}
             onClose={() => {
                 setOpen(false)
                 setTimeout(() => {
                     pickedPlaceId(null)
-                },400)
+                }, 400)
             }}
             onOpen={() => setOpen(true)}
         >
             {(!geoapifyGetPlaceRecordQueryLoading && placeData) ? (
                 <Stack direction={'column'} padding={theme.spacing(2)} spacing={theme.spacing(1)}>
-                    <Box width={'100%'} minHeight={"100px"}>
-                        {image ? (
-                            <AlexImageView src={image}/>
-                        ) : (
-                            <CircularProgress/>
-                        )}
-                    </Box>
-                    <Stack direction={'row'} alignItems={'center'} spacing={theme.spacing(1)} justifyContent={'space-between'}>
+                    {imageState?.length ? (
+                        <div style={{marginBottom: '10px'}}>
+                            <Slider {...{
+                                dots: true,
+                                infinite: true,
+                                speed: 500,
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                adaptiveHeight: true,
+                            }}>
+                                {imageState.map((item) => (
+                                    <AlexImageView src={item} paperStyles={{height: '100%'}} modal/>
+                                ))}
+                            </Slider>
+                        </div>
+                    ) : (
+                        <CircularProgress/>
+                    )}
+                    <Stack direction={'row'} alignItems={'center'} spacing={theme.spacing(1)}
+                           justifyContent={'space-between'}>
                         <Typography variant={'h4'}>
                             {placeData.name}
                         </Typography>
@@ -99,7 +115,8 @@ export const PlaceCardDrawer:FC<IProps> = () => {
                     <Typography variant={'subtitle1'}>
                         {placeData.description}
                     </Typography>
-                    <Stack direction={'row'} alignItems={'center'} spacing={theme.spacing(1)} justifyContent={'space-between'}>
+                    <Stack direction={'row'} alignItems={'center'} spacing={theme.spacing(1)}
+                           justifyContent={'space-between'}>
                         <Stack direction={'row'}>
                             <AlexIcon icon={(
                                 <SvgIcon>
@@ -141,7 +158,10 @@ export const PlaceCardDrawer:FC<IProps> = () => {
                             </Stack>
                         </Stack>
                     </Stack>
-                    <Button variant={'outlined'} color={'primary'}>
+                    <Button variant={'outlined'} color={'primary'}
+                            onClick={() => {
+                                navigate(`/places/place?id=${pickedPlaceIdVar}`)
+                            }}>
                         Показать ещё
                     </Button>
                     <Button variant={'contained'} color={'secondary'}>
