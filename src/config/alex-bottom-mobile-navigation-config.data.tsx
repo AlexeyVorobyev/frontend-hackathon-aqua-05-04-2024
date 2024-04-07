@@ -58,7 +58,7 @@ export const alexBottomMobileNavigationConfigData: TBottomNavigationConfig[] = [
     },
     {
         name: 'Советы',
-        path: '/advices/',
+        path: '/tips/',
         icon: (
             <SvgIcon>
                 <svg width="34" height="25" viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg">

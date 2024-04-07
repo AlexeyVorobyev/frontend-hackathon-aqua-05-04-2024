@@ -5,6 +5,9 @@ import {RoutesPage} from '../components/page/routes/routes-page.component.tsx'
 import { PlacesPage } from '../components/page/places/places.component.tsx'
 import { ProfilePage } from '../components/page/profile/profile.tsx'
 import {PlacePage} from '../components/page/place/place.component.tsx'
+import { TipsPage } from '../components/page/tips/tips-page.component.tsx'
+import { TipsCategoryPage } from '../components/page/tips/tips-category.component.tsx'
+import { TipPage } from '../components/page/tips/tip-page.component.tsx'
 
 export const routesListConfig: TRoute[] = [
     {
@@ -38,9 +41,21 @@ export const routesListConfig: TRoute[] = [
     },
 
     {
-        path: '/advices/',
+        path: '/tips/:id/:page',
         name: 'Советы',
-        component: null,
+        component: <TipPage/>
+    },
+
+    {
+        path: '/tips/:id',
+        name: 'Советы',
+        component: <TipsCategoryPage/>
+    },
+
+    {
+        path: '/tips/',
+        name: 'Советы',
+        component: <TipsPage/>,
     },
 
     {
