@@ -22,8 +22,8 @@ export const varsBehaviourMapMapPage = (params: any): Record<string, any> | null
             ...(params[EMapPageStoredOptions.simpleFilter]?.length && {
                 simpleFilter: params[EMapPageStoredOptions.simpleFilter],
             }),
-            ...(params[EMapPageStoredOptions.simpleFilter]?.length && {
-                simpleFilter: params[EMapPageStoredOptions.simpleFilter],
+            ...(params[EMapPageStoredOptions.placeType]?.length && {
+                categories: params[EMapPageStoredOptions.placeType],
             }),
             ...(params[EMapPageStoredOptions.placeCondition]?.length && {
                 conditions: params[EMapPageStoredOptions.placeCondition],

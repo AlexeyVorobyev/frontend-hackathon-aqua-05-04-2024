@@ -26,7 +26,14 @@ export enum EMapPageStoredOptions {
     bounds = 'bounds',
     simpleFilter = 'simpleFilter',
     placeType= 'placeType',
-    placeCondition='placeCondition'
+    placeCondition='placeCondition',
+    mode='mode',
+    route='route'
+}
+
+export enum EMapPageMode {
+    default='default',
+    route='route'
 }
 
 export const MapPage: FC = () => {
@@ -51,6 +58,7 @@ export const MapPage: FC = () => {
             [EMapPageStoredOptions.baseLayer, GLOBAL_CONFIG.mapLayersConfig[0].name],
             [EMapPageStoredOptions.grayScale, false],
             [EMapPageStoredOptions.clusters, true],
+            [EMapPageStoredOptions.mode,EMapPageMode.route]
         ] as [string, any][]),
     })
 
@@ -74,8 +82,6 @@ export const MapPage: FC = () => {
         }
     }, [variables])
 
-    const pickedPlaceIdVar = useReactiveVar(pickedPlaceId)
-
     return (<>
         {geoapifyGetPlaceListQueryLoading && (
             <CircularProgress sx={{
@@ -92,8 +98,5 @@ export const MapPage: FC = () => {
             setStoredOptions={setStoredOptions}
             externalPlacesList={geoapifyGetPlaceListQueryData?.place.list.data || null}
         />
-        {pickedPlaceIdVar && (
-            <PlaceCardDrawer id={pickedPlaceIdVar}/>
-        )}
     </>)
 }

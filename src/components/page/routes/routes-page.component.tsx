@@ -3,6 +3,7 @@ import {AlexIcon} from '../../../shared-react-components/alex-icon/alex-icon.com
 import {routesMockData} from '../../../mock/routes/routes.data.tsx'
 import {RouteCard} from '../../widget/route-card/route-card.component.tsx'
 import {useNavigate} from 'react-router-dom'
+import {EMapPageMode, EMapPageStoredOptions} from '../map/map-page.component.tsx'
 
 export const RoutesPage = () => {
 
@@ -190,7 +191,7 @@ export const RoutesPage = () => {
                             </Box>
 
                             <Button variant={'contained'} color={'secondary'}
-                                    onClick={() => navigate('/')}>
+                                    onClick={() => navigate(`/?${EMapPageStoredOptions.mode}=${EMapPageMode.route}`)}>
                                 Создать маршрут
                             </Button>
                         </Stack>

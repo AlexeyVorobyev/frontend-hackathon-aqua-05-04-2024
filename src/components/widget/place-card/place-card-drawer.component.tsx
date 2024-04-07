@@ -12,12 +12,22 @@ import {fetchImageList} from '../../../api/search-image-adapter/search-image-lis
 import {AlexImageView} from '../../../shared-react-components/form-utils/AlexImageView/AlexImageView.tsx'
 import Slider from 'react-slick'
 import {useNavigate} from 'react-router-dom'
+import {
+    TSetStoredOptions,
+    TStoredOptions,
+} from '../../../shared-react-components/functions/useAlexPageState/useAlexPageState.tsx'
+import {EMapPageStoredOptions} from '../../page/map/map-page.component.tsx'
+import {TRouteEngineElem} from '../map/routing/routing-engine.component.tsx'
 
 interface IProps {
     id: string
+    storedOptions: TStoredOptions,
+    setStoredOptions: TSetStoredOptions
 }
 
-export const PlaceCardDrawer: FC<IProps> = () => {
+export const PlaceCardDrawer: FC<IProps> = ({
+                                                id, storedOptions, setStoredOptions,
+                                            }) => {
     const [open, setOpen] = useState<boolean>(false)
 
     useEffect(() => {
@@ -164,8 +174,23 @@ export const PlaceCardDrawer: FC<IProps> = () => {
                             }}>
                         Показать ещё
                     </Button>
-                    <Button variant={'contained'} color={'secondary'}>
-                        Поехали!
+                    <Button variant={'contained'} color={'secondary'}
+                            onClick={() => {
+                                setStoredOptions((prev) => {
+                                    const previousRoute: TRouteEngineElem[] = prev.get(EMapPageStoredOptions.route)
+                                    previousRoute.push({
+                                        id: pickedPlaceIdVar,
+                                        name: placeData?.name,
+                                        coordinates: {
+                                            lat: placeData?.location.coordinates.lat,
+                                            lon: placeData?.location.coordinates.lon
+                                        }
+                                    } as TRouteEngineElem)
+                                    prev.set(EMapPageStoredOptions.route, previousRoute)
+                                    return new Map(prev)
+                                })
+                            }}>
+                        Добавить в маршрут!
                     </Button>
                 </Stack>
             ) : (

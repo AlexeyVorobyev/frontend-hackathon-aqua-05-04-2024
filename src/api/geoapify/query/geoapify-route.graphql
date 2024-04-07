@@ -1,0 +1,31 @@
+query GeoapifyRoute ($input: TRouteRoutingInput!) {
+    route {
+        routing(input: $input) {
+            meta {
+                distance
+                distanceUnit
+                mode
+                countries
+                traffic
+                time
+            }
+            legs {
+                meta {
+                    distance
+                    time
+                }
+                steps {
+                    coordinates {
+                        lat
+                        lon
+                    }
+                    instruction
+                    meta {
+                        distance
+                        time
+                    }
+                }
+            }
+        }
+    }
+}

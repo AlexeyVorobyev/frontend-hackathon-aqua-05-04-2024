@@ -6,3 +6,4 @@ export const userGeolocation = makeVar<GeolocationCoordinates | null>(null)
 
 export const pickedPlaceId = makeVar<string | null>(null)
 
+export const createRouteReactive = makeVar<boolean>(false)

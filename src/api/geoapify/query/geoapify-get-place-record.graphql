@@ -21,6 +21,10 @@ query GeoapifyGetPlaceRecord($input: TPlaceRecordInput!) {
                 fullAddress
                 street
                 country
+                coordinates {
+                    lon
+                    lat
+                }
             }
         }
     }

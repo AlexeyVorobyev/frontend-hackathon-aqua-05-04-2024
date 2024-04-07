@@ -15,15 +15,18 @@ import {UserMarker} from './markers/user-marker.component.tsx'
 import {GeoapifyGetPlaceListQuery} from '../../../core/apollo/types/graphql/graphql.ts'
 import {EMarkerType, IPlaceMarkerProps, PlaceMarker} from './markers/external-place-marker.component.tsx'
 import MarkerClusterGroup from 'react-leaflet-cluster'
-import {AlexFilters} from '../../../shared-react-components/AlexFilters/AlexFilters.tsx'
 import {Box} from '@mui/system'
-import {Button} from '@mui/material'
 import {AlexInput} from '../../../shared-react-components/form-utils/AlexInput/AlexInput.tsx'
-import {AlexInputControlled} from '../../../shared-react-components/form-utils/AlexInput/AlexInputControlled.tsx'
-import {FormProvider, useForm} from 'react-hook-form'
 import {AlexFiltersDialog} from '../../../shared-react-components/AlexFilters/AlexFiltersDialog.tsx'
 import {useDebounce} from '../../hook/useDebounce.tsx'
 import {alexFiltersConfigData} from '../../../config/alex-filters-config.data.tsx'
+import {EMapPageMode} from '../../page/map/map-page.component.tsx'
+import {RoutingEngine} from './routing/routing-engine.component.tsx'
+import {PlaceCardDrawer} from '../place-card/place-card-drawer.component.tsx'
+import {useReactiveVar} from '@apollo/client'
+import {pickedPlaceId} from '../../../core/apollo/vars.ts'
+import zIndex from '@mui/material/styles/zIndex'
+import {RoutingEngineDisplay} from './routing/routing-map-display.component.tsx'
 
 type TPlacesList = GeoapifyGetPlaceListQuery['place']['list']['data']
 
@@ -57,6 +60,9 @@ export const MapRender: FC<IProps> = ({
             } as IPlaceMarkerProps
         })
     }, [externalPlacesList])
+
+
+    const pickedPlaceIdVar = useReactiveVar(pickedPlaceId)
 
     useEffect(() => {
         if (Array.isArray(externalPlacesList)) {
@@ -120,6 +126,10 @@ export const MapRender: FC<IProps> = ({
                            ),
                        }}/>
         </Box>
+        {pickedPlaceIdVar && (
+            <PlaceCardDrawer id={pickedPlaceIdVar} storedOptions={storedOptions}
+                             setStoredOptions={setStoredOptions}/>
+        )}
         <MapContainer
             preferCanvas={true}
             maxZoom={GLOBAL_CONFIG.mapMaxZoom}
@@ -132,6 +142,16 @@ export const MapRender: FC<IProps> = ({
                 height: '100%',
             }}
         >
+            <Box sx={{
+                position: 'absolute',
+                zIndex: 403,
+                right: '25px',
+                bottom: '105px',
+            }}>
+                <RoutingEngine
+                    storedOptions={storedOptions}
+                    setStoredOptions={setStoredOptions} localData={externalPlacesList}/>
+            </Box>
 
             <Pane name={'externalPlacesMarkers'} style={{zIndex: 410}}>
                 {storedOptions.get('clusters')
@@ -143,6 +163,11 @@ export const MapRender: FC<IProps> = ({
                     </>)
                     : <>{renderExternalPlaceMarkers}</>
                 }
+            </Pane>
+
+            <Pane name={'route'} style={{zIndex:409}}>
+                <RoutingEngineDisplay storedOptions={storedOptions}
+                                      setStoredOptions={setStoredOptions}/>
             </Pane>
 
             <MapBounds
