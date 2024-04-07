@@ -45,7 +45,7 @@ export const RoutingEngineDisplay: FC<IProps> = ({
 
     useEffect(() => {
         console.log(route,display, 'HERE')
-        if (route && display) {
+        if (route && display && route?.length) {
             geoapifyGetRouteListLazyQuery({
                 variables: {
                     input: {
@@ -64,8 +64,6 @@ export const RoutingEngineDisplay: FC<IProps> = ({
     const dataCoordinates = useMemo(() => {
         return geoapifyGetRouteListQueryData?.route.routing.legs
     }, [geoapifyGetRouteListQueryData])
-
-    console.log(dataCoordinates, 'HERE')
 
     return (<>
         {dataCoordinates?.map((item_1) => {

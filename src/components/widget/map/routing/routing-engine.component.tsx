@@ -112,8 +112,12 @@ export const RoutingEngine: FC<IProps> = ({
 
                             <Box width={'100%'} marginTop={'20px'}>
                                 <Button id={'dude'} variant={'contained'} fullWidth onClick={() => {
-                                    createRouteReactive(false)
-                                    createRouteReactive(true)
+                                    setTimeout(() => {
+                                        createRouteReactive(false)
+                                    },1)
+                                    setTimeout(() => {
+                                        createRouteReactive(true)
+                                    },1000)
                                 }}>
                                     Построить маршрут!
                                 </Button>
