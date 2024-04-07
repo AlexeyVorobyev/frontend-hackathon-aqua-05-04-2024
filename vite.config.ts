@@ -19,8 +19,8 @@ export default defineConfig({
             includeAssets: ['vite.svg', 'apple-touch-icon.png'],
             manifest: {
                 name: 'На колёсах!',
-                short_name: 'НАК',
-                description: 'My Awesome App description',
+                short_name: 'На колёсах!',
+                description: 'Лучшее приложение для караванинга!',
                 theme_color: '#ffffff',
                 icons: [
                     {
