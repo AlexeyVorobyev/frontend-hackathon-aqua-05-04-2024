@@ -120,9 +120,35 @@ export const RoutingEngine: FC<IProps> = ({
                             </Box>
                             <Box width={'100%'} marginTop={'20px'}>
                                 <Button id={'dude2'} color={'secondary'} variant={'contained'} fullWidth onClick={() => {
+                                    if (route) {
+                                        const url = new URL(
+                                            'https://yandex.ru/maps/?ll=46.108264%2C57.749737&mode=routes&rtt=auto&ruri=~~~&z=5.93'
+                                        )
+                                        const constructedRoute = route
+                                            .map((item) => `${item.coordinates.lat}%2C${item.coordinates.lon}`)
 
+                                        window.location.replace(
+                                            'https://yandex.ru/maps/?mode=routes&rtt=auto&ruri=~~~&z=5.93'
+                                            + `&rtext=${constructedRoute?.join('~')}`
+                                            + `&ll=${route[0].coordinates.lat}%2C${route[0].coordinates.lon}`
+                                        )
+                                    }
                                 }}>
-                                    Экспортировать маршрут
+                                    Экспортировать маршрут (Яндекс-карты)
+                                </Button>
+                            </Box>
+                            <Box width={'100%'} marginTop={'20px'}>
+                                <Button id={'dude2'} color={'error'} variant={'contained'} fullWidth onClick={() => {
+                                    setStoredOptions((prev) => {
+                                        prev.delete(EMapPageStoredOptions.route)
+                                        return new Map(prev)
+                                    })
+                                    setTimeout(() => {
+                                        createRouteReactive(false)
+                                        createRouteReactive(true)
+                                    },1000)
+                                }}>
+                                    Сбросить маршрут
                                 </Button>
                             </Box>
                         </>
